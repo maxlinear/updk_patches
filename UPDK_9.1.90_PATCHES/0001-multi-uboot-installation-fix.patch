@@ -1,0 +1,180 @@
+From 837d3fd0eba114cffa2a047edd76a739ac0db709 Mon Sep 17 00:00:00 2001
+From: Bhavesh Bharadiya <bnbharadiya@maxlinear.com>
+Date: Wed, 11 Jun 2025 12:02:17 +0530
+Subject: [PATCH] multi-uboot installation fix
+
+When multiple U-Boots were enabled, the U-Boot files were being overwritten during installation
+due to the TARGET_VARIANT (file: include/pakage-bin.mk) value is not evaluating properly.
+
+Removed all explicit BUILD_VARIANT install definition sections; now the installation will happen through the default install section.
+
+Signed-off-by: santhosh kumar mt <santhoshkumarmt@maxlinear.com>
+---
+ uboot-intel-x86/Makefile | 151 ---------------------------------------
+ 1 file changed, 151 deletions(-)
+
+diff --git a/uboot-intel-x86/Makefile b/uboot-intel-x86/Makefile
+index 5f9d1ad..f3f4405 100644
+--- a/uboot-intel-x86/Makefile
++++ b/uboot-intel-x86/Makefile
+@@ -219,157 +219,6 @@ define Package/$(PKG_NAME)/install
+ endef
+ endif
+ 
+-define Package/uboot-lgp-urx651-10g-lan-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx651-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-10g-lan-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-overlay-10g-lan-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-10g-lan-emmc-firewall-on/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-p34x-phy-2K-page-ebu_nand/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-p34x-phy-4K-page-ebu_nand/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-4GB-ddr-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-p34x-phy-emmc-firewall-on/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-sec-10g-lan-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-sec-p34x-phy-2K-page-ebu_nand/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-sec-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-sec-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-secure-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-emmc-cust-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-emmc-field-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-lgp-urx851-emmc-manuboot-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx640-rtl8261-4K-ebu-nand-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-aqn-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-10g-lan-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-overlay-10g-lan-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-sec-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-secure-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-emmc-cust-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-emmc-field-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-emmc-manuboot-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-4GB-ddr-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx641-4GB-ddr-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-aqn-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-p34x-phy-4K-page-ebu_nand/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-10g-lan-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-overlay-10g-lan-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-sec-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-sec-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-secure-overlay-p34x-phy-emmc-prpl/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-emmc-cust-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-emmc-field-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-octopus-urx851-emmc-manuboot-img/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-osp-tb341-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-osp-tb341-overlay-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-define Package/uboot-osp-tb341-4GB-ddr-p34x-phy-emmc/install
+-	$(call Package/$(PKG_NAME)/install, $(1))
+-endef
+-
+ # dummy package for global config options
+ $(eval $(call BuildPackage,$(PKG_NAME)))
+ 
+-- 
+2.17.1
+

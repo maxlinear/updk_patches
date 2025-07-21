@@ -1,0 +1,13 @@
+diff --git a/openwrt/base_network/services/dnsmasq-prpl/Makefile b/openwrt/base_network/services/dnsmasq-prpl/Makefile
+index bc0e09fe..618857ef 100644
+--- a/openwrt/base_network/services/dnsmasq-prpl/Makefile
++++ b/openwrt/base_network/services/dnsmasq-prpl/Makefile
+@@ -13,7 +13,7 @@ PKG_RELEASE:=1
+ PKG_VERSION:=gen_2.90_v0.2.3
+ PKG_SOURCE:=dnsmasq-$(PKG_VERSION).tar.gz
+ PKG_SOURCE_URL:=https://gitlab.com/prpl-foundation/mirrors/dnsmasq/-/archive/$(PKG_VERSION)
+-PKG_HASH:=18762435b75cd86fdb9eb145c74a0608eb7e8c3bd0af1d4b08b1c9845bbddf16
++PKG_HASH:=7d4223a22e5f6d4a895e15a1a68f07a914edc684fe6f210e36f3fdd52fdcc87e
+ PKG_BUILD_DIR:=$(BUILD_DIR)/dnsmasq-$(PKG_VERSION)
+ 
+ PKG_LICENSE:=GPL-2.0

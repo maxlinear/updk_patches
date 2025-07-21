@@ -1,0 +1,38 @@
+diff --git a/wlan_wave_feed/mod-whm/patches/WLANRTSYS-89662_client_mode.patch b/wlan_wave_feed/mod-whm/patches/WLANRTSYS-89662_client_mode.patch
+new file mode 100644
+index 0000000..6192d73
+--- /dev/null
++++ b/wlan_wave_feed/mod-whm/patches/WLANRTSYS-89662_client_mode.patch
+@@ -0,0 +1,32 @@
++commit 03f93c516a42d259d796f0c64ae5afb506f0febb
++Author: karthikgk@maxlinear.com <karthikgk@lvdocker7.lvsw.maxlinear.com>
++Date:   Tue May 27 02:13:49 2025 -0700
++
++    WLANRTSYS-89662 : [WAV700][Client mode] not able to connect WAV700 as a
++    client.
++    
++    Issue : client is not connecting to the Ap
++    
++    Root cause : This is a regression due to commit e591a9aa079ce4ba5c8bb52833eb109f54d66bab due to typo.
++    
++    Fix : Add "vendor_elems" instead of "vendor_elements" into the config
++    file.
++    
++    Fixup to : e591a9aa079ce4ba5c8bb52833eb109f54d66bab(WLANRTSYS-89350 Fix
++    mem leak when creating conifguration files)
++    
++    signed-off-by : karthik gk <karthikgk@maxlinear.com>
++
++diff --git a/src/whm_mxl_supp_cfg.c b/src/whm_mxl_supp_cfg.c
++index 80c6a5c..72f946f 100644
++--- a/src/whm_mxl_supp_cfg.c
+++++ b/src/whm_mxl_supp_cfg.c
++@@ -34,7 +34,7 @@ static swl_rc_ne s_whm_mxl_ep_updateGlobalConfig(T_EndPoint* pEP, wld_wpaSupp_co
++     char* vendorElems       = amxd_object_get_value(cstring_t, pEpVendorObj, "VendorElements", NULL);
++ 
++     if(!(swl_str_isEmpty(vendorElems))) {
++-        swl_mapCharFmt_addValStr(global, "vendor_elements", "%s", vendorElems);
+++        swl_mapCharFmt_addValStr(global, "vendor_elems", "%s", vendorElems);
++     }
++     free(vendorElems);
++ 
